@@ -9,6 +9,7 @@ Mac terminal configuration files managed with symbolic links.
 | `zshrc` | `~/.zshrc` | Zsh shell config — aliases, plugins, prompt |
 | `starship.toml` | `~/.config/starship.toml` | Starship prompt theme |
 | `ghostty-config` | `~/.config/ghostty/config` | Ghostty terminal emulator config |
+| `tmux.conf` | `~/.config/tmux/tmux.conf` | Tmux config — vi keybindings, mouse support |
 | `Brewfile` | — | Homebrew packages and casks |
 
 ## Setup on a new machine
@@ -44,6 +45,10 @@ ln -sf ~/dotfiles/starship.toml ~/.config/starship.toml
 # Ghostty
 mkdir -p ~/.config/ghostty
 ln -sf ~/dotfiles/ghostty-config ~/.config/ghostty/config
+
+# Tmux
+mkdir -p ~/.config/tmux
+ln -sf ~/dotfiles/tmux.conf ~/.config/tmux/tmux.conf
 ```
 
 ### 5. Set up fzf shell integration
