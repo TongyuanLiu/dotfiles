@@ -1,4 +1,5 @@
 brew "bat"
+brew "lazygit"
 brew "eza"
 brew "fzf"
 brew "starship"

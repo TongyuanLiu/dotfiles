@@ -4,6 +4,7 @@ if [[ -x /opt/homebrew/bin/brew ]]; then
 fi
 
 # Useful aliases
+alias lg="lazygit"
 alias ls="eza --icons"
 alias ll="eza -lah --icons"
 alias la="eza -la --icons"
