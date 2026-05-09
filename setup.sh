@@ -1,17 +1,22 @@
-#!/bin/zsh
-set -e
+#!/usr/bin/env bash
+set -euo pipefail
 
-DOTFILES="$(cd "$(dirname "$0")" && pwd)"
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-link() {
-  local src="$DOTFILES/$1"
-  local dst="$2"
-  mkdir -p "$(dirname "$dst")"
-  ln -sf "$src" "$dst"
-  echo "linked $dst"
-}
+if [[ "${EUID:-$(id -u)}" -eq 0 && -n "${SUDO_USER:-}" ]]; then
+  echo "Run this script as your normal user, not with sudo. It will ask for sudo when needed." >&2
+  exit 1
+fi
 
-link zshrc            ~/.zshrc
-link tmux.conf        ~/.tmux.conf
-link starship.toml    ~/.config/starship.toml
-link ghostty-config   ~/.config/ghostty/config
+case "$(uname -s)" in
+  Darwin)
+    exec "$ROOT/mac/setup.sh"
+    ;;
+  Linux)
+    exec "$ROOT/linux/setup.sh"
+    ;;
+  *)
+    echo "Unsupported OS: $(uname -s)" >&2
+    exit 1
+    ;;
+esac

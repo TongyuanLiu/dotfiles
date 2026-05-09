@@ -1,0 +1,68 @@
+# Ubuntu/Linux Zsh config
+
+if [[ -z "${ZSH_VERSION:-}" ]]; then
+  echo "This config is for zsh. Run 'exec zsh' to start zsh, or 'zsh' to test it."
+  return 0 2>/dev/null || exit 0
+fi
+
+path_prepend() {
+  [[ -d "$1" ]] || return
+  case ":$PATH:" in
+    *":$1:"*) ;;
+    *) PATH="$1:$PATH" ;;
+  esac
+}
+
+command_exists() {
+  command -v "$1" >/dev/null 2>&1
+}
+
+source_if_exists() {
+  [[ -r "$1" ]] && source "$1"
+}
+
+path_prepend "$HOME/.local/bin"
+path_prepend "$HOME/bin"
+
+# Completion
+autoload -Uz compinit
+compinit -i
+
+# Useful aliases with Linux-friendly fallbacks
+alias lg="lazygit"
+
+if command_exists eza; then
+  alias ls="eza --icons"
+  alias ll="eza -lah --icons"
+  alias la="eza -la --icons"
+else
+  alias ls="ls --color=auto"
+  alias ll="ls -lah --color=auto"
+  alias la="ls -la --color=auto"
+fi
+
+if command_exists bat; then
+  alias cat="bat"
+elif command_exists batcat; then
+  alias cat="batcat"
+fi
+
+# zoxide
+if command_exists zoxide; then
+  eval "$(zoxide init zsh)"
+  alias cd="z"
+fi
+
+# zsh plugins from Ubuntu packages
+source_if_exists /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source_if_exists /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# fzf
+source_if_exists "$HOME/.fzf.zsh"
+source_if_exists /usr/share/doc/fzf/examples/key-bindings.zsh
+source_if_exists /usr/share/doc/fzf/examples/completion.zsh
+
+# Starship prompt
+if command_exists starship; then
+  eval "$(starship init zsh)"
+fi

@@ -15,12 +15,20 @@ $character"""
 
 add_newline = true
 
+[username]
+format = "[$user]($style) "
+
+[hostname]
+format = "[$ssh_symbol$hostname]($style) "
+
 [directory]
+format = "[$path]($style)[$read_only]($read_only_style) "
 style = "bold cyan"
 truncation_length = 3
 truncate_to_repo = true
 
 [git_branch]
+format = "[$symbol$branch(:$remote_branch)]($style) "
 symbol = " "
 style = "bold purple"
 
