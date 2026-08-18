@@ -5,6 +5,12 @@ if [[ -z "${ZSH_VERSION:-}" ]]; then
   return 0 2>/dev/null || exit 0
 fi
 
+# SSH forwards Ghostty's TERM value, but older remote systems may not have
+# its terminfo entry yet. Fall back so ZLE can redraw the command line safely.
+if [[ "${TERM:-}" == "xterm-ghostty" ]] && ! infocmp xterm-ghostty >/dev/null 2>&1; then
+  export TERM=xterm-256color
+fi
+
 path_prepend() {
   [[ -d "$1" ]] || return
   case ":$PATH:" in

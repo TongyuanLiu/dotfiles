@@ -122,7 +122,7 @@ install_jetbrains_mono_nerd_font() {
   fi
 
   local url tmpdir font_dir
-  url="$(curl -fsSL https://api.github.com/repos/ryanoasis/nerd-fonts/releases/latest | awk -F '"' '/browser_download_url/ && $4 ~ /JetBrainsMono\.zip$/ { print $4; exit }')"
+  url="$(curl -fsSL https://api.github.com/repos/ryanoasis/nerd-fonts/releases/latest | awk -F '"' '/browser_download_url/ && $4 ~ /JetBrainsMono\.zip$/ && !url { url=$4 } END { print url }')"
   if [[ -z "$url" ]]; then
     echo "Could not find the latest JetBrainsMono Nerd Font release asset" >&2
     exit 1
@@ -163,7 +163,7 @@ install_lazygit() {
       ;;
   esac
 
-  url="$(curl -fsSL https://api.github.com/repos/jesseduffield/lazygit/releases/latest | awk -F '"' -v arch="$asset_arch" '/browser_download_url/ && $4 ~ "Linux_" arch ".tar.gz$" { print $4; exit }')"
+  url="$(curl -fsSL https://api.github.com/repos/jesseduffield/lazygit/releases/latest | awk -F '"' -v arch="$asset_arch" '/browser_download_url/ && $4 ~ "linux_" arch ".tar.gz$" && !url { url=$4 } END { print url }')"
   if [[ -z "$url" ]]; then
     echo "Could not find a lazygit Linux release for $asset_arch" >&2
     exit 1
