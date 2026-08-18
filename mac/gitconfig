@@ -1,0 +1,2 @@
+[format]
+	pretty = format:%C(auto)%h%d %s %C(dim white)(%cr, %an)%C(reset)

@@ -19,6 +19,7 @@ Shared file names are kept the same inside each folder so the setup scripts can 
 | `starship.toml` | `~/.config/starship.toml` | Starship prompt theme |
 | `ghostty-config` | `~/.config/ghostty/config` | Ghostty terminal emulator config |
 | `tmux.conf` | `~/.tmux.conf` | Tmux config: vi keybindings, mouse support, clipboard |
+| `gitconfig` | included from `~/.gitconfig` (macOS) | Compact, colored `git log` format |
 
 ## Ubuntu/Linux setup
 

@@ -31,3 +31,8 @@ link zshrc            ~/.zshrc
 link tmux.conf        ~/.tmux.conf
 link starship.toml    ~/.config/starship.toml
 link ghostty-config   ~/.config/ghostty/config
+
+if ! git config --global --get-all include.path | grep -Fqx "$DOTFILES/gitconfig"; then
+  git config --global --add include.path "$DOTFILES/gitconfig"
+  echo "included $DOTFILES/gitconfig from ~/.gitconfig"
+fi

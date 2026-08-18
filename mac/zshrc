@@ -8,6 +8,9 @@ if [[ -x /opt/homebrew/bin/brew ]]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
+# Keep long Git output in less's alternate screen so it disappears on quit.
+export GIT_PAGER="less -+F -+X -R"
+
 # Useful aliases
 alias lg="lazygit"
 alias ls="eza --icons"
