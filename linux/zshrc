@@ -30,6 +30,9 @@ source_if_exists() {
 path_prepend "$HOME/.local/bin"
 path_prepend "$HOME/bin"
 
+# Keep long Git output in less's alternate screen so it disappears on quit.
+export GIT_PAGER="less -+F -+X -R"
+
 # Completion
 autoload -Uz compinit
 compinit -i
